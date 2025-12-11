@@ -93,6 +93,60 @@ class LinkedList {
     }
     current.next = null;
   }
+
+  contains(value) {
+    if (this.head === null) {
+      return 'Linked List is empty.';
+    }
+
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.value === value) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
+  }
+
+  find(value) {
+    if (this.head === null) {
+      return 'Linked List is empty.';
+    }
+
+    let count = 0;
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.value === value) {
+        return count;
+      }
+      count++;
+      current = current.next;
+    }
+
+    return 'The value is not present in the Linked List.';
+  }
+
+  toString() {
+    if (this.head === null) {
+      return 'Linked List is empty.';
+    }
+
+    let current = this.head;
+    let total = '';
+
+    while (current !== null) {
+      if (current.next === null) {
+        total += `(${current.value})`;
+        return total;
+      }
+      total += `(${current.value}) -> `;
+      current = current.next;
+    }
+    return total;
+  }
 }
 
 const list = new LinkedList();
@@ -104,5 +158,4 @@ list.append('hamster');
 list.append('snake');
 list.append('turtle');
 
-list.pop();
-console.log(list.getTail());
+console.log(list.toString());
