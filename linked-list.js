@@ -1,6 +1,6 @@
 import { Node } from './node-class.js';
 
-class LinkedList {
+export class LinkedList {
   constructor() {
     this.head = null;
   }
@@ -139,7 +139,7 @@ class LinkedList {
 
     while (current !== null) {
       if (current.next === null) {
-        total += `(${current.value})`;
+        total += `(${current.value}) -> ${null}`;
         return total;
       }
       total += `(${current.value}) -> `;
@@ -147,15 +147,48 @@ class LinkedList {
     }
     return total;
   }
+
+  insertAt(value, index) {
+    if (this.head === null) {
+      return 'Linked List is empty.';
+    } else if (index > this.getSize()) {
+      return 'This index is out of bounds.';
+    } else if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+
+    let count = 0;
+    let current = this.head;
+
+    while (count < index - 1) {
+      current = current.next;
+      count++;
+    }
+
+    const newNode = new Node(value);
+    newNode.next = current.next;
+    current.next = newNode;
+  }
+
+  removeAt(index) {
+    if (this.head === null) {
+      return 'Linked List is empty.';
+    } else if (index > this.getSize()) {
+      return 'This index is out of bounds.';
+    } else if (index === 0) {
+      this.head = this.head.next;
+      return;
+    }
+
+    let count = 0;
+    let current = this.head;
+
+    while (count < index - 1) {
+      current = current.next;
+      count++;
+    }
+
+    current.next = current.next.next;
+  }
 }
-
-const list = new LinkedList();
-
-list.append('dog');
-list.append('cat');
-list.append('parrot');
-list.append('hamster');
-list.append('snake');
-list.append('turtle');
-
-console.log(list.toString());
