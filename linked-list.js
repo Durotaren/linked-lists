@@ -27,7 +27,7 @@ export class LinkedList {
 
   getSize() {
     if (this.head === null) {
-      return 'Linked List is empty.';
+      return 0;
     }
 
     let size = 0;
@@ -53,23 +53,23 @@ export class LinkedList {
     }
 
     let current = this.head;
-    while (current !== null) {
-      if (current.next === null) {
-        return current;
-      }
+    while (current.next !== null) {
       current = current.next;
     }
+    return current;
   }
 
   atIndex(index) {
     if (this.head === null) {
       return 'Linked List is empty.';
+    } else if (index < 0 || index > this.getSize()) {
+      return null;
     }
 
     let current = this.head;
-    let count = 1;
+    let count = 0;
 
-    while (count <= index) {
+    while (count <= index - 1) {
       count++;
       current = current.next;
     }
@@ -151,7 +151,7 @@ export class LinkedList {
   insertAt(value, index) {
     if (this.head === null) {
       return 'Linked List is empty.';
-    } else if (index > this.getSize()) {
+    } else if (index < 0 || index > this.getSize()) {
       return 'This index is out of bounds.';
     } else if (index === 0) {
       this.prepend(value);
@@ -174,7 +174,7 @@ export class LinkedList {
   removeAt(index) {
     if (this.head === null) {
       return 'Linked List is empty.';
-    } else if (index > this.getSize()) {
+    } else if (index < 0 || index > this.getSize()) {
       return 'This index is out of bounds.';
     } else if (index === 0) {
       this.head = this.head.next;
